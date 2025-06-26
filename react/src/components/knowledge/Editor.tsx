@@ -61,7 +61,7 @@ function useDebounce<T extends (...args: any[]) => any>(
   )
 }
 
-export default function Editor({ knowledgeID }: { knowledgeID: string }) {
+export default function Editor({ knowledgeID = '' }: { knowledgeID?: string }) {
   const HEADER_HEIGHT = 50
   const { theme } = useTheme()
   const [isTextSelected, setIsTextSelected] = useState(false)
@@ -96,7 +96,7 @@ export default function Editor({ knowledgeID }: { knowledgeID: string }) {
           mdxEditorRef.current?.setMarkdown(content)
           setIsLoading(false)
         } else {
-          toast.error('Failed to read file ' + curPath)
+          toast.error('Failed to read file ' + knowledgeID)
         }
       })
   }, [])

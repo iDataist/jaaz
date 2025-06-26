@@ -99,7 +99,9 @@ First git clone this repo:
 
 `cd react`
 
-`npm install --force && npm run dev`
+`npm install --force`
+`npm run build`
+`npm run dev`
 
 `cd server`
 
