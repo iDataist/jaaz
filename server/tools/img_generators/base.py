@@ -43,11 +43,43 @@ async def get_image_info_and_save(url, file_path_without_extension, is_b64=False
     else:
         # Fetch the image asynchronously
         async with HttpClient.create() as client:
-            response = await client.get(url)
-            # Read the image content as bytes
-            image_content = response.content
+            response = await client.get(url, headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+            })
+            print(f"📥 [download] GET {url} -> status {response.status_code} content-type {response.headers.get('content-type')}")
+            if response.status_code != 200:
+                print("⚠️ httpx download failed, trying curl_cffi…")
+                try:
+                    from curl_cffi import requests as curl_requests
+                    curl_res = curl_requests.get(url, impersonate="chrome")
+                    print(f"📥 [curl_cffi] status {curl_res.status_code}")
+                    image_content = curl_res.content
+                except Exception as e:
+                    print("❌ curl_cffi fallback failed", e)
+                    raise
+            else:
+                # Read the image content as bytes
+                image_content = response.content
     # Open the image
-    image = Image.open(BytesIO(image_content))
+    try:
+        image = Image.open(BytesIO(image_content))
+    except Exception as e:
+        print("❌ [PIL] Failed to open image: ", e)
+        # Save raw bytes to debug file
+        debug_path = f"{file_path_without_extension}_raw.bin"
+        async with aiofiles.open(debug_path, 'wb') as dbg:
+            await dbg.write(image_content)
+
+        # Fallback: assume WebP (Midjourney) 1024x1024
+        mime_type = "image/webp"
+        width = 1024
+        height = 1024
+        extension = "webp"
+        file_path = f"{file_path_without_extension}.{extension}"
+        async with aiofiles.open(file_path, 'wb') as out_file:
+            await out_file.write(image_content)
+        print(f"🔧 [fallback] Saved raw image bytes to {file_path}")
+        return mime_type, width, height, extension
 
     # Get MIME type
     mime_type = Image.MIME.get(image.format if image.format else 'PNG')

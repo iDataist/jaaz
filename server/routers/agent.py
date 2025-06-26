@@ -55,7 +55,7 @@ async def get_models():
         for model_name in models:
             if provider == 'ollama':
                 continue
-            if provider != 'comfyui' and config[provider].get('api_key', '') == '':
+            if provider not in ['comfyui', 'midjourney'] and config[provider].get('api_key', '') == '':
                 continue
             model = models[model_name]
             res.append({

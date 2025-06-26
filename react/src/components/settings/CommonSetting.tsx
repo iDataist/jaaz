@@ -60,7 +60,9 @@ export default function CommonSetting({
   }
 
   const isImageProvider =
-    providerKey === 'replicate' || providerKey === 'huggingface'
+    ['replicate', 'huggingface', 'wavespeed', 'comfyui', 'volces', 'midjourney'].includes(
+      providerKey,
+    )
   const hasMaxTokens = !isImageProvider
 
   return (
