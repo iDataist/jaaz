@@ -1,0 +1,26 @@
+Open Source License for Jaaz
+Jaaz is released under a modified Apache License 2.0, with the following additional terms and conditions tailored to its local-first, multimodal AI Agent architecture:
+
+1. Permitted Use & Commercial Restrictions
+   You are free to use Jaaz for research, personal use, or internal business purposes, including as a component within a larger local or cloud-based system. However, a commercial license must be obtained under the following conditions:
+   a. Multi-tenant Hosting or SaaS Use
+   Operating Jaaz as a multi-tenant service, such as offering hosted design or generation services to external clients via Jaaz APIs or frontend, requires a commercial license or written authorization.
+   Tenant Definition: Each isolated workspace or client instance (whether via API, UI, or CLI) is considered a tenant under this clause.
+   b. Branding and Attribution
+   When using the Jaaz frontend interface (including default dashboards or tools):
+   You may not remove, obscure, or alter the Jaaz logo, name, or copyright without written consent.
+   This clause does not apply to headless API-only usage or frontend-overridden deployments with explicit written authorization.
+   c. Model Integration & Distribution
+   Jaaz supports the integration of local and external models. You are responsible for ensuring compliance with third-party model licenses. Redistribution of bundled models requires adherence to each model’s respective license.
+2. Contributions and Upstream Rights
+   By contributing to the Jaaz project (via pull requests, issues, or other means), you agree that:
+   a. License Adjustments
+   The maintainers reserve the right to update this license to strengthen or relax conditions as the project evolves, with prior notice in the main repository.
+   b. Commercial Use of Contributions
+   All contributed code, configurations, and documentation may be used by the maintainers for both open-source and commercial purposes, including but not limited to Jaaz’s paid enterprise deployments, cloud integrations, and private model offerings.
+3. Intellectual Property & UI
+   The visual and interaction design of Jaaz (including iconography, component arrangement, and prompt UX) is protected under applicable UI/UX design rights and may not be copied or resold as a derivative product without permission.
+4. Base License
+   Aside from the above specific terms, Jaaz adheres to the Apache License 2.0. Full license text available at:
+   http://www.apache.org/licenses/LICENSE-2.0
+   © 2025 Jaaz Contributors & 11cafe Studio. All rights reserved.
