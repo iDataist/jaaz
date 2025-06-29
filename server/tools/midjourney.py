@@ -14,7 +14,7 @@ load_dotenv()
 AuthUserTokenV3_r = os.getenv("TOKEN_R")
 AuthUserTokenV3_i = os.getenv("TOKEN_I")
 api_base = os.getenv("API_BASE", "midjourney.com")
-suffix = os.getenv("SUFFIX", "--v 6.1")
+suffix = os.getenv("SUFFIX", "--v 7")
 
 
 # The Discord channel ID is required by the Midjourney endpoint & must correspond
